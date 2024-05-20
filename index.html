@@ -6,12 +6,38 @@
     <title></title>
 </head>
 <body>
-    <form action="">
+    <div id="contenedor">
         <label for="pass">Contraseña</label>
-        <input type="text" name="pass">
-        <button type="submit" onclick="apretarBoton()">Validar</button>
-    </form>
-    
+        <input type="text" name="pass" id="miInput">
+        <button for="pass" onclick="mostrarValor()">Validar</button>
+    </div>
+    <div id="trabajadores">
+        <div>
+            <label for="Pedro" id="Pedro" selected>Pedro</label>
+            <input type="radio" name="opcion">
+        </div>
+        <div>
+            <label for="Ana" id="Ana">Ana</label>
+            <input type="radio" name="opcion">
+        </div>
+        <div>
+            <label for="Luis" id="Luis">Luis</label>
+            <input type="radio" name="opcion">
+        </div>
+        <div>
+            <label for="Marta" id="Marta">Marta</label>
+            <input type="radio" name="opcion">
+        </div>
+        <div>
+            <label for="Jorge" id="Jorge">Jorge</label>
+            <input type="radio" name="opcion">
+        </div>
+
+        <button for="accion" onclick="realizarAccion('showInfo')" value="BtnInfo">Mostrar información</button>
+        <button for="accion" onclick="realizarAccion('calcBonif')" value="BtnBonif">Calcular bonificación</button>
+        <button for="accion" onclick="realizarAccion('incSalario')" value="BtnSal">Aumentar Salario</button>
+    </div>
 </body>
 <script src="index.js"></script>
+
 </html>
