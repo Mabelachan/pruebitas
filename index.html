@@ -14,29 +14,34 @@
     <div id="trabajadores">
         <div>
             <label for="Pedro" id="Pedro" selected>Pedro</label>
-            <input type="radio" name="opcion">
+            <input type="radio" name="opcion" value="Pedro">
         </div>
         <div>
             <label for="Ana" id="Ana">Ana</label>
-            <input type="radio" name="opcion">
+            <input type="radio" name="opcion" value="Ana">
         </div>
         <div>
             <label for="Luis" id="Luis">Luis</label>
-            <input type="radio" name="opcion">
+            <input type="radio" name="opcion" value="Luis">
         </div>
         <div>
             <label for="Marta" id="Marta">Marta</label>
-            <input type="radio" name="opcion">
+            <input type="radio" name="opcion" value="Marta">
         </div>
         <div>
             <label for="Jorge" id="Jorge">Jorge</label>
-            <input type="radio" name="opcion">
+            <input type="radio" name="opcion" value="Jorge">
         </div>
 
-        <button for="accion" onclick="realizarAccion('showInfo')" value="BtnInfo">Mostrar información</button>
-        <button for="accion" onclick="realizarAccion('calcBonif')" value="BtnBonif">Calcular bonificación</button>
-        <button for="accion" onclick="realizarAccion('incSalario')" value="BtnSal">Aumentar Salario</button>
     </div>
+
+    <button for="accion" onclick="realizarAccion('showInfo')" >Mostrar información</button>
+    <button for="accion" onclick="realizarAccion('calcBonif')" >Calcular bonificación</button>
+    <button for="accion" onclick="realizarAccion('incSalario')" >Aumentar Salario</button>
+
+    <div id="datos"></div>
+    
+</div>
 </body>
 <script src="index.js"></script>
 

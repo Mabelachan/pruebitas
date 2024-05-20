@@ -50,33 +50,53 @@ let personas = [
 
 
 function realizarAccion(accion){
-    let radioBtn = document.querySelector('input[name="opcion"]:checked')
-    console.log(radioBtn)
+    function limpiarParrafos(){
+        let parrafos = datos.querySelectorAll('p');
+        parrafos.forEach(parrafo => {
+        parrafo.remove();
+        });
+    }
 
+    let radioBtn = document.querySelector('input[name="opcion"]:checked')
+    console.log(radioBtn.value)
     let usuarioEncontrado 
     let salarioIncrementado
     let bonificacion
+    let contenedor = document.getElementById('datos')
     for (let i = 0; i < personas.length; i++) {
             usuarioEncontrado = personas.find(function(persona) {
             return persona.name == radioBtn.value;
         });
     }
     if(accion == "showInfo"){
+        limpiarParrafos()
         console.log(usuarioEncontrado)
+        Object.keys(usuarioEncontrado).forEach(key => {
+            let parrafo = document.createElement('p');
+            parrafo.textContent = `${key}: ${usuarioEncontrado[key]}`;
+            contenedor.appendChild(parrafo);
+        });
     }
     else if(accion == "incSalario"){
+        limpiarParrafos()
         console.log("Salario actual: " + usuarioEncontrado.salario)
-
         salarioIncrementado = usuarioEncontrado.salario += 500
-        console.log("Nuevo salario: "+ salarioIncrementado)
+        let parrafo = document.createElement('p');
+        parrafo.textContent = "Nuevo salario: "+ salarioIncrementado;
+        contenedor.appendChild(parrafo);
+        
     }
     else if(accion == "calcBonif"){
+        limpiarParrafos()
         bonificacion = usuarioEncontrado.salario * 0.10 * usuarioEncontrado.antiguedad;
-        console.log("Bonificación por años de servicio: " + bonificacion)}
+        let parrafo = document.createElement('p');
+        parrafo.textContent = "Bonificación por años de servicio: " + bonificacion;
+        contenedor.appendChild(parrafo);
+        }
     else{       
         console.log("acción inválida")
     }
-
+    
     
 }
 /*function realizarAccion(name, accion){
@@ -107,7 +127,7 @@ function realizarAccion(accion){
     
 }
 */
-realizarAccion("Marta","calcBonif")
+//realizarAccion("Marta","calcBonif")
 
 
 
