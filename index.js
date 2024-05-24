@@ -47,58 +47,118 @@ let personas = [
         antiguedad: 10
     }
 ];
+let usuarioEncontrado 
+let bonificacion
+let contenedor = document.getElementById('datos')
+let parrafo = document.createElement('p');
+let fechaActual = new Date()
 
+function limpiarParrafos(){
+    let parrafos = datos.querySelectorAll('p');
+    parrafos.forEach(parrafo => {
+    parrafo.remove();
+    });
+}
+function usuarioSeleccionado() {
+    let radioBtn = document.querySelector('input[name="opcion"]:checked');
+    if (radioBtn) {
+        usuarioEncontrado = personas.find(persona => persona.name == radioBtn.value);
+    }
+}
 
-function realizarAccion(accion){
-    function limpiarParrafos(){
-        let parrafos = datos.querySelectorAll('p');
-        parrafos.forEach(parrafo => {
-        parrafo.remove();
-        });
-    }
+function mostrarHistorial(){
+    
+    Object.keys(usuarioEncontrado).forEach(key => {
+    //un if que  solo haga esto si esque key es distinto a 'history'
+        if(usuarioEncontrado[key] !=history){
+            let parrafo = document.createElement('p')
+            parrafo.textContent = `${key}: ${usuarioEncontrado[key]}`
+            contenedor.appendChild(parrafo)
+        }   
+    });   
 
-    let radioBtn = document.querySelector('input[name="opcion"]:checked')
-    console.log(radioBtn.value)
-    let usuarioEncontrado 
-    let salarioIncrementado
-    let bonificacion
-    let contenedor = document.getElementById('datos')
-    for (let i = 0; i < personas.length; i++) {
-            usuarioEncontrado = personas.find(function(persona) {
-            return persona.name == radioBtn.value;
-        });
-    }
-    if(accion == "showInfo"){
-        limpiarParrafos()
-        console.log(usuarioEncontrado)
-        Object.keys(usuarioEncontrado).forEach(key => {
-            let parrafo = document.createElement('p');
-            parrafo.textContent = `${key}: ${usuarioEncontrado[key]}`;
-            contenedor.appendChild(parrafo);
-        });
-    }
-    else if(accion == "incSalario"){
-        limpiarParrafos()
-        console.log("Salario actual: " + usuarioEncontrado.salario)
-        salarioIncrementado = usuarioEncontrado.salario += 500
-        let parrafo = document.createElement('p');
-        parrafo.textContent = "Nuevo salario: "+ salarioIncrementado;
-        contenedor.appendChild(parrafo);
-        
-    }
-    else if(accion == "calcBonif"){
-        limpiarParrafos()
-        bonificacion = usuarioEncontrado.salario * 0.10 * usuarioEncontrado.antiguedad;
-        let parrafo = document.createElement('p');
-        parrafo.textContent = "Bonificación por años de servicio: " + bonificacion;
-        contenedor.appendChild(parrafo);
-        }
-    else{       
-        console.log("acción inválida")
+    if(usuarioEncontrado && usuarioEncontrado.hasOwnProperty('history')){
+        for (let i = 0; i < usuarioEncontrado.history.length; i++) {
+            //opcion uno usando las key
+            // Object.keys(usuarioEncontrado.history[i]).forEach(key => {
+            //     let parrafo = document.createElement('p')
+            //     parrafo.textContent = `${key}: ${usuarioEncontrado.history[i][key]}`
+            //     contenedor.appendChild(parrafo)
+            // });
+
+            //opcion dos usando valores en duro
+            let parrafoUno = document.createElement('p')
+            let parrafoDos = document.createElement('p')
+            let parrafoTres = document.createElement('p')
+            parrafoUno.textContent = `Monto Anterior: ${usuarioEncontrado.history[i].montoAnterior}`
+            parrafoDos.textContent = `Monto Actual: ${usuarioEncontrado.history[i].montoActual}`
+            parrafoTres.textContent = `Fecha Modificación: ${usuarioEncontrado.history[i].fechaModif}`
+            contenedor.appendChild(parrafoUno)
+            contenedor.appendChild(parrafoDos)
+            contenedor.appendChild(parrafoTres)
+                
+        } 
+    }else{
+        parrafo.textContent = "Usuario no posee historial"
+        contenedor.appendChild(parrafo)
     }
     
+    //por cada key del usuarioEncontrado crea un parrafo con la key y el valor
     
 }
+
+function showInfo(){
+    limpiarParrafos()
+    usuarioSeleccionado()
+    mostrarHistorial()
+}
+function incSalario(){
+    usuarioSeleccionado()
+    limpiarParrafos()
+    let salarioAnterior = usuarioEncontrado.salario
+    let salarioIncrementado = usuarioEncontrado.salario += 500
+    let history = {
+    montoAnterior: salarioAnterior,
+    montoActual: salarioIncrementado,
+    fechaModif: fechaActual }
+
+    console.log("Salario actual: " + usuarioEncontrado.salario)
+    // verifica si el objeto encontrado tiene la propiedad history si la tiene, la agrega al final
+    if (usuarioEncontrado.hasOwnProperty('history')) {
+        usuarioEncontrado.history.push(history)
+        //si no la tiene, se la crea
+    } else {
+        usuarioEncontrado.history = [{
+            montoAnterior: salarioAnterior,
+            montoActual: salarioIncrementado,
+            fechaModif: fechaActual
+        }]
+    }      
+        parrafo.textContent = "Nuevo salario: "+ salarioIncrementado;
+        contenedor.appendChild(parrafo);
+    
+}
+
+function calcBonif(){
+    usuarioSeleccionado()
+    limpiarParrafos()
+    bonificacion = usuarioEncontrado.salario * 0.10 * usuarioEncontrado.antiguedad;
+    parrafo.textContent = "Bonificación por años de servicio: " + bonificacion;
+    contenedor.appendChild(parrafo)
+}
+
+function dismSalario(){
+    usuarioSeleccionado()
+    if (usuarioEncontrado.salario > 1000){
+        let salarioActual = usuarioEncontrado.salario -= 1000
+        parrafo.textContent = "El nuevo salario es: " + salarioActual;
+        contenedor.appendChild(parrafo)
+    }else{
+        parrafo.textContent = "Ha llegado al máximo de descuentos para este usuario";
+        contenedor.appendChild(parrafo)
+    }
+}
+
 /*function realizarAccion(name, accion){
     let usuarioEncontrado 
     let salarioIncrementado
@@ -139,4 +199,8 @@ de antigüedad y muestra la bonificación en la consola.
 La función realizarAccion toma dos parámetros: el nombre del usuario y la acción a realizar. 
 
 Dependiendo de la acción proporcionada, la función ejecuta la lógica correspondiente y muestra el resultado 
-en la consola. */
+en la consola. 
+
+Crear una función que se encargue de mostrar el historial del usuario seleccionado por pantalla, no consola. En caso de que el usuario
+ no tenga historial, mostrar mensaje con contenido "Usuario no tiene historial". Tips: asi como creas un <p> puedes crear muchos más recorriendo un array.
+*/
