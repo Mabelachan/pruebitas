@@ -1,0 +1,48 @@
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.seleccion, .buttons{
+    display: flex;
+    max-width: 800px;
+    padding: 20px;
+    justify-content: space-between;
+}
+h2{
+    text-transform: capitalize;
+    padding-left: 20px;
+}
+button{
+    height: 40px;
+    width: 180px;
+    cursor: pointer;
+}
+table {
+    border-collapse: collapse;
+    width: 800px;
+    padding: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4c56af;
+    color: white;
+}
+
+/* Estilo para las filas impares */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}

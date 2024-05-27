@@ -55,9 +55,7 @@ let fechaActual = new Date()
 
 function limpiarParrafos(){
     let parrafos = datos.querySelectorAll('p');
-    parrafos.forEach(parrafo => {
-    parrafo.remove();
-    });
+    parrafos.forEach(parrafo => { parrafo.remove()});
 }
 function usuarioSeleccionado() {
     let radioBtn = document.querySelector('input[name="opcion"]:checked');
@@ -90,12 +88,15 @@ function mostrarHistorial(){
             let parrafoUno = document.createElement('p')
             let parrafoDos = document.createElement('p')
             let parrafoTres = document.createElement('p')
+            let parrafoCuatro = document.createElement('p')
             parrafoUno.textContent = `Monto Anterior: ${usuarioEncontrado.history[i].montoAnterior}`
             parrafoDos.textContent = `Monto Actual: ${usuarioEncontrado.history[i].montoActual}`
             parrafoTres.textContent = `Fecha Modificación: ${usuarioEncontrado.history[i].fechaModif}`
+            parrafoCuatro.textContent = `Acción: ${usuarioEncontrado.history[i].accion}` 
             contenedor.appendChild(parrafoUno)
             contenedor.appendChild(parrafoDos)
             contenedor.appendChild(parrafoTres)
+            contenedor.appendChild(parrafoCuatro)
                 
         } 
     }else{
@@ -120,20 +121,17 @@ function incSalario(){
     let history = {
     montoAnterior: salarioAnterior,
     montoActual: salarioIncrementado,
-    fechaModif: fechaActual }
-
-    console.log("Salario actual: " + usuarioEncontrado.salario)
+    fechaModif: fechaActual,
+    accion: "AUMENTO"
+}
     // verifica si el objeto encontrado tiene la propiedad history si la tiene, la agrega al final
     if (usuarioEncontrado.hasOwnProperty('history')) {
         usuarioEncontrado.history.push(history)
         //si no la tiene, se la crea
     } else {
-        usuarioEncontrado.history = [{
-            montoAnterior: salarioAnterior,
-            montoActual: salarioIncrementado,
-            fechaModif: fechaActual
-        }]
+        usuarioEncontrado.history = [history]
     }      
+        let parrafo = document.createElement('p');
         parrafo.textContent = "Nuevo salario: "+ salarioIncrementado;
         contenedor.appendChild(parrafo);
     
@@ -149,14 +147,32 @@ function calcBonif(){
 
 function dismSalario(){
     usuarioSeleccionado()
-    if (usuarioEncontrado.salario > 1000){
-        let salarioActual = usuarioEncontrado.salario -= 1000
-        parrafo.textContent = "El nuevo salario es: " + salarioActual;
-        contenedor.appendChild(parrafo)
-    }else{
-        parrafo.textContent = "Ha llegado al máximo de descuentos para este usuario";
-        contenedor.appendChild(parrafo)
-    }
+    limpiarParrafos()   
+    let salarioAnterior = usuarioEncontrado.salario
+    let salarioDism = usuarioEncontrado.salario -= 1000
+    let history = {
+        montoAnterior: salarioAnterior,
+        montoActual: salarioDism,
+        fechaModif: fechaActual,
+        accion: "DISMINUCIÓN"
+}
+    // verifica si el objeto encontrado tiene la propiedad history si la tiene, la agrega al final
+    if (usuarioEncontrado.hasOwnProperty('history')) {
+        usuarioEncontrado.history.push(history)
+        //si no la tiene, se la crea
+    } else {
+        usuarioEncontrado.history = [history]
+    }      
+        let parrafo = document.createElement('p');
+        parrafo.textContent = "Nuevo salario: "+ salarioDism;
+        contenedor.appendChild(parrafo);
+    // if (usuarioEncontrado.salario > 1000){
+    //     let salarioActual = usuarioEncontrado.salario - 1000
+    //     parrafo.textContent = "El nuevo salario es: " + salarioActual;
+    // }else{
+    //     parrafo.textContent = "Ha llegado al máximo de descuentos para este usuario";
+    //     contenedor.appendChild(parrafo)
+    // }
 }
 
 /*function realizarAccion(name, accion){

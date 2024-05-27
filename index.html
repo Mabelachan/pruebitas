@@ -3,45 +3,96 @@
 <html lang="es">
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap" rel="stylesheet">
     <title>Pruebitas Noob</title>
 </head>
 <body>
-    <div id="contenedor">
+    <!-- <div id="contenedor">
         <label for="pass">Contraseña</label>
         <input type="text" name="pass" id="miInput">
         <button for="pass" onclick="mostrarValor()">Validar</button>
+    </div> -->
+    <div class="trabajadoresCont">
+        <div id="trabajadores" class="usuarios">
+            <h2>Usuarios</h2>
+            <div class="seleccion">
+                <div>
+                    <label for="Pedro" id="Pedro" selected>Pedro</label>
+                    <input type="radio" name="opcion" value="Pedro">
+                </div>
+                <div>
+                    <label for="Ana" id="Ana">Ana</label>
+                    <input type="radio" name="opcion" value="Ana">
+                </div>
+                <div>
+                    <label for="Luis" id="Luis">Luis</label>
+                    <input type="radio" name="opcion" value="Luis">
+                </div>
+                <div>
+                    <label for="Marta" id="Marta">Marta</label>
+                    <input type="radio" name="opcion" value="Marta">
+                </div>
+                <div>
+                    <label for="Jorge" id="Jorge">Jorge</label>
+                    <input type="radio" name="opcion" value="Jorge">
+                </div>
+            </div>    
+        </div>
+        <div class="actions">
+            <h2>Acción</h2>
+            <div class="buttons">
+                <button for="accion" onclick="showInfo()" >Mostrar información</button>
+                <button for="accion" onclick="calcBonif()" >Calcular bonificación</button>
+                <button for="accion" onclick="incSalario()" >Aumentar Salario</button>
+                <button for="accion" onclick="dismSalario()" >Disminuir Salario</button>
+            </div>
+        </div>
+        <div id="datos">
+            <h2>Detalle</h2>
+        </div>
+        <div class="historial">
+            <h2>Historial</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Departamento</th>
+                        <th>Edad</th>
+                        <th>Salario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pedro</td>
+                        <td>TI</td>
+                        <td>25</td>
+                        <td>$2000</td>
+                    </tr>
+                    <tr>
+                        <td>Ana</td>
+                        <td>Recursos Humanos</td>
+                        <td>30</td>
+                        <td>$2500</td>
+                    </tr>
+                    <tr>
+                        <td>Luis</td>
+                        <td>Marketing</td>
+                        <td>28</td>
+                        <td>$2200</td>
+                    </tr>
+                    <tr>
+                        <td>Marta</td>
+                        <td>Ventas</td>
+                        <td>35</td>
+                        <td>$3000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div id="trabajadores">
-        <div>
-            <label for="Pedro" id="Pedro" selected>Pedro</label>
-            <input type="radio" name="opcion" value="Pedro">
-        </div>
-        <div>
-            <label for="Ana" id="Ana">Ana</label>
-            <input type="radio" name="opcion" value="Ana">
-        </div>
-        <div>
-            <label for="Luis" id="Luis">Luis</label>
-            <input type="radio" name="opcion" value="Luis">
-        </div>
-        <div>
-            <label for="Marta" id="Marta">Marta</label>
-            <input type="radio" name="opcion" value="Marta">
-        </div>
-        <div>
-            <label for="Jorge" id="Jorge">Jorge</label>
-            <input type="radio" name="opcion" value="Jorge">
-        </div>
-
-    </div>
-
-    <button for="accion" onclick="showInfo()" >Mostrar información</button>
-    <button for="accion" onclick="calcBonif()" >Calcular bonificación</button>
-    <button for="accion" onclick="incSalario()" >Aumentar Salario</button>
-    <button for="accion" onclick="dismSalario()" >Disminuir Salario</button>
-    <div id="datos"></div>
-    
-</div>
 </body>
 <script src="index.js"></script>
 
